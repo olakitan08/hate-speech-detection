@@ -1,0 +1,17 @@
+numpy
+pandas
+scikit-learn
+scipy
+statsmodels
+joblib
+torch
+transformers
+datasets
+accelerate
+matplotlib
+seaborn
+nltk
+tqdm
+nbformat
+ipykernel
+jupyterlab

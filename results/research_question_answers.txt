@@ -1,0 +1,68 @@
+================================================================================
+RESEARCH QUESTION ANSWERS — BASED ON EXPERIMENTAL RESULTS
+================================================================================
+
+RQ1: How does the comparative performance of ML and DL models change
+     as training dataset size increases from small to large subsets?
+
+  Dataset: Davidson
+    LR            small=0.6900  medium=0.6983  large=0.6922
+    SVM           small=0.6523  medium=0.6484  large=0.6181
+    BERT          small=0.6539  medium=0.7107  large=0.6785
+    DISTILBERT    small=0.6710  medium=0.7062  large=0.6670
+    [small ] Best ML=0.6900  Best DL=0.6710  DL advantage=-0.0189
+    [medium] Best ML=0.6983  Best DL=0.7107  DL advantage=+0.0124
+    [large ] Best ML=0.6922  Best DL=0.6785  DL advantage=-0.0137
+
+  Dataset: Hatexplain
+    LR            small=0.7872  medium=0.7894  large=0.7931
+    SVM           small=0.7860  medium=0.7825  large=0.7903
+    BERT          small=0.8120  medium=0.8211  large=0.8238
+    DISTILBERT    small=0.8050  medium=0.8157  large=0.8241
+    [small ] Best ML=0.7872  Best DL=0.8120  DL advantage=+0.0248
+    [medium] Best ML=0.7894  Best DL=0.8211  DL advantage=+0.0317
+    [large ] Best ML=0.7931  Best DL=0.8241  DL advantage=+0.0310
+
+
+RQ2: Does linguistic dataset complexity moderate the ML vs DL gap?
+     (Davidson = explicit; HateXplain = implicit)
+
+  Subset: Small (20%)
+    LR            Davidson=0.6900  HateXplain=0.7872  Gap=-0.0972
+    SVM           Davidson=0.6523  HateXplain=0.7860  Gap=-0.1337
+    BERT          Davidson=0.6539  HateXplain=0.8120  Gap=-0.1581
+    DISTILBERT    Davidson=0.6710  HateXplain=0.8050  Gap=-0.1339
+
+  Subset: Medium (50%)
+    LR            Davidson=0.6983  HateXplain=0.7894  Gap=-0.0911
+    SVM           Davidson=0.6484  HateXplain=0.7825  Gap=-0.1340
+    BERT          Davidson=0.7107  HateXplain=0.8211  Gap=-0.1104
+    DISTILBERT    Davidson=0.7062  HateXplain=0.8157  Gap=-0.1095
+
+  Subset: Large (100%)
+    LR            Davidson=0.6922  HateXplain=0.7931  Gap=-0.1009
+    SVM           Davidson=0.6181  HateXplain=0.7903  Gap=-0.1722
+    BERT          Davidson=0.6785  HateXplain=0.8238  Gap=-0.1453
+    DISTILBERT    Davidson=0.6670  HateXplain=0.8241  Gap=-0.1571
+
+
+RQ3: Is feature representation or model architecture the primary driver
+     of performance differences?
+
+  Full-dataset (Large condition) results:
+    LR            davidson    Macro_F1=0.6922  Params=0
+    BERT          davidson    Macro_F1=0.6785  Params=109,483,778
+    DISTILBERT    davidson    Macro_F1=0.6670  Params=66,955,010
+    SVM           davidson    Macro_F1=0.6181  Params=0
+    DISTILBERT    hatexplain  Macro_F1=0.8241  Params=66,955,010
+    BERT          hatexplain  Macro_F1=0.8238  Params=109,483,778
+    LR            hatexplain  Macro_F1=0.7931  Params=0
+    SVM           hatexplain  Macro_F1=0.7903  Params=0
+
+  Interpretation:
+  - If DL consistently outperforms ML on HateXplain but not Davidson,
+    the architecture + contextual embeddings advantage is dataset-conditional.
+  - If the gap holds on both datasets at large scale, architecture and
+    feature representation together drive performance.
+  - If ML achieves competitive results at small sizes on Davidson,
+    TF-IDF feature quality is the key determinant for explicit content.
